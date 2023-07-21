@@ -7,6 +7,7 @@ import ru.netology.data.SqlHelper;
 import ru.netology.page.LoginPage;
 
 
+
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.data.SqlHelper.cleanDB;
@@ -19,8 +20,7 @@ public class TestService {
 
     @Test
     void shouldLoginSuccess() {
-        open("http://localhost:9999", LoginPage.class);
-        var loginPage = new LoginPage();
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authUser = DataHelper.getAuthUser();
         var verificationPage = loginPage.validLogin(authUser);
         verificationPage.verificationPageVisibility();
@@ -30,8 +30,7 @@ public class TestService {
 
     @Test
     void shouldLoginRandomUser() {
-        open("http://localhost:9999", LoginPage.class);
-        var loginPage = new LoginPage();
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getRandomUser();
         loginPage.validLogin(authInfo);
         loginPage.getError();
@@ -39,8 +38,7 @@ public class TestService {
 
     @Test
     void shouldPutInvalidPass() {
-        open("http://localhost:9999", LoginPage.class);
-        var loginPage = new LoginPage();
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authUser = new DataHelper.AuthUser(DataHelper.getAuthUser().getLogin(),
                 DataHelper.getRandomUser().getPassword());
         loginPage.validLogin(authUser);
@@ -49,8 +47,7 @@ public class TestService {
 
     @Test
     void shouldPutInvalidVerificationCode() {
-        open("http://localhost:9999", LoginPage.class);
-        var loginPage = new LoginPage();
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authUser = DataHelper.getAuthUser();
         var verificationPage = loginPage.validLogin(authUser);
         verificationPage.verificationPageVisibility();
@@ -61,8 +58,7 @@ public class TestService {
 
     @Test
     void shouldBlockAfterThreeTimes() {
-        open("http://localhost:9999", LoginPage.class);
-        var loginPage = new LoginPage();
+        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authUserFirst = new DataHelper.AuthUser(DataHelper.getAuthUser().getLogin(),
                 DataHelper.getRandomUser().getPassword());
         loginPage.validLogin(authUserFirst);
